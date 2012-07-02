@@ -6,7 +6,7 @@ import hudson.model.AbstractBuild;
 
 public class ClangScanBuildUtils{
 	
-	public static final String REPORT_OUTPUT_FOLDERNAME = "CheckStyleReports";
+	public static final String REPORT_OUTPUT_FOLDERNAME = "Reports/";
 	
 //	public static String getIconsPath(){
 //		return "/plugin/" + PluginImpl.SHORTNAME + "/icons/";

@@ -11,6 +11,7 @@ import hudson.tasks.Recorder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -57,7 +58,7 @@ public class ClangScanBuildPublisher extends Recorder{
 		listener.getLogger().println( "Publishing Checkstyle reports to CheckStyleReports folder" );
 		
 		FilePath sourceDir = ClangScanBuildUtils.locateClangScanBuildReportFolder(build);
-		FilePath destDir = new FilePath(build.getWorkspace(), ClangScanBuildUtils.REPORT_OUTPUT_FOLDERNAME);
+		FilePath destDir = new FilePath(build.getWorkspace(), ClangScanBuildUtils.REPORT_OUTPUT_FOLDERNAME + "_" + Calendar.getInstance().getTime());
 		
 		copyReportsToBackup(sourceDir, destDir, listener);
 		
