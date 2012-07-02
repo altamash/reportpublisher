@@ -15,17 +15,26 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+import org.kohsuke.stapler.DataBoundConstructor;
 
 public class ClangScanBuildPublisher extends Recorder{
 	
+	public final String pattern;	
 	private static final Logger LOGGER = Logger.getLogger( ClangScanBuildPublisher.class.getName() );
 	
 	@Extension
 	public static final ClangScanBuildPublisherDescriptor DESCRIPTOR = new ClangScanBuildPublisherDescriptor();
 
-	public ClangScanBuildPublisher(){
-		
-		super();
+	@DataBoundConstructor
+	public ClangScanBuildPublisher(String pattern){
+		this.pattern = pattern;
+		try {
+            Pattern.compile(pattern);
+        } catch (PatternSyntaxException e) {
+            // falls through 
+        }
 	}
 
 //	@Override
@@ -60,7 +69,8 @@ public class ClangScanBuildPublisher extends Recorder{
 	 */
 	private void copyReportsToBackup( FilePath source, FilePath dest, BuildListener listener ){
 		try{
-			source.copyRecursiveTo( "**/target/checkstyle-result.xml", dest );
+//			source.copyRecursiveTo( "**/target/checkstyle-result.xml", dest );
+			source.copyRecursiveTo( pattern, dest );
 		}catch( Exception e ){
 			listener.fatalError( "Unable to copy Checkstyle reports to CheckStyleReports." );
 		}

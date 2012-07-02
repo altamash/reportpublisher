@@ -16,11 +16,11 @@ public class ClangScanBuildPublisherDescriptor extends BuildStepDescriptor<Publi
 		load();
 	}
 	
-	@Override
-	public Publisher newInstance(StaplerRequest arg0, JSONObject json ) throws hudson.model.Descriptor.FormException {
-
-		return new ClangScanBuildPublisher();
-	}
+//	@Override
+//	public Publisher newInstance(StaplerRequest arg0, JSONObject json ) throws hudson.model.Descriptor.FormException {
+//
+//		return new ClangScanBuildPublisher();
+//	}
 	
 	@Override
 	public String getDisplayName() {
