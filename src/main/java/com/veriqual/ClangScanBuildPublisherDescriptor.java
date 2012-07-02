@@ -24,7 +24,7 @@ public class ClangScanBuildPublisherDescriptor extends BuildStepDescriptor<Publi
 	
 	@Override
 	public String getDisplayName() {
-		return "Publish Checkstyle reports to CheckStyleReports folder";
+		return "Publish files to Reports folder";
 	}
 
 	@Override
