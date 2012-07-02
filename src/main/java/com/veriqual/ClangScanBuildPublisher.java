@@ -55,7 +55,7 @@ public class ClangScanBuildPublisher extends Recorder{
 	@Override
 	public boolean perform( AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener ) throws InterruptedException, IOException {
 
-		listener.getLogger().println( "Publishing Checkstyle reports to CheckStyleReports folder" );
+		listener.getLogger().println( "Publishing Checkstyle reports to Reports folder" );
 		
 		FilePath sourceDir = ClangScanBuildUtils.locateClangScanBuildReportFolder(build);
 		FilePath destDir = new FilePath(build.getWorkspace(), ClangScanBuildUtils.REPORT_OUTPUT_FOLDERNAME + "_" + Calendar.getInstance().getTime());
