@@ -9,12 +9,12 @@
         <version>2.1.2</version><!-- which version of Hudson is this plugin built against? -->
     </parent>
 
-    <groupId>com.veriqual</groupId>
+    <groupId>com.icsnett.hudson</groupId>
     <artifactId>filespublisher</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <packaging>hpi</packaging>
 
-    <name>My New Plugin</name>
+    <name>ICS Report Publisher</name>
 
 </project>

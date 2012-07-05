@@ -1,4 +1,4 @@
-package com.veriqual;
+package com.icsnett.hudson.publisher;
 
 import hudson.model.AbstractProject;
 import hudson.model.FreeStyleProject;
@@ -9,10 +9,10 @@ import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 
 
-public class ClangScanBuildPublisherDescriptor extends BuildStepDescriptor<Publisher>{
+public class ICSReportPublisherDescriptor extends BuildStepDescriptor<Publisher>{
 
-	public ClangScanBuildPublisherDescriptor(){
-		super( ClangScanBuildPublisher.class );
+	public ICSReportPublisherDescriptor(){
+		super( ICSReportPublisher.class );
 		load();
 	}
 	
@@ -30,9 +30,14 @@ public class ClangScanBuildPublisherDescriptor extends BuildStepDescriptor<Publi
 	@Override
 	public boolean isApplicable( @SuppressWarnings("rawtypes") Class<? extends AbstractProject> jobType ){
 		if( !FreeStyleProject.class.isAssignableFrom( jobType ) ){
-			System.err.println( "Clang scan-build ERROR: Expected FreeStyleProject but was: " + jobType + " at Publisher Descriptor" );
+			System.err.println( "ERROR: Expected FreeStyleProject but was: " + jobType + " at Publisher Descriptor" );
 		}
 		return FreeStyleProject.class.isAssignableFrom( jobType );
 	}
+	
+	@Override
+    public String getHelpFile() {
+        return "/plugin/filespublisher/help.html";
+    }
 
 }

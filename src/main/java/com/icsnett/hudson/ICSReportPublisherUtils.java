@@ -1,10 +1,10 @@
-package com.veriqual;
+package com.icsnett.hudson;
 
 import hudson.FilePath;
 import hudson.model.AbstractBuild;
 
 
-public class ClangScanBuildUtils{
+public class ICSReportPublisherUtils{
 	
 	public static final String REPORT_OUTPUT_FOLDERNAME = "Reports/";
 	
@@ -16,7 +16,7 @@ public class ClangScanBuildUtils{
 //		return "/plugin/" + PluginImpl.SHORTNAME + "/transparent.png";
 //	}
 	
-	public static FilePath locateClangScanBuildReportFolder( AbstractBuild<?,?> build ){
+	public static FilePath locateReportSourceFolder( AbstractBuild<?,?> build ){
 		if( build == null ) return null;
 		return build.getWorkspace();
 	}

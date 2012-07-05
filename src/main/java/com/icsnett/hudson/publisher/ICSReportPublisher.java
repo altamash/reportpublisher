@@ -1,4 +1,4 @@
-package com.veriqual;
+package com.icsnett.hudson.publisher;
 
 import hudson.Extension;
 import hudson.FilePath;
@@ -9,27 +9,25 @@ import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Recorder;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import org.kohsuke.stapler.DataBoundConstructor;
 
-public class ClangScanBuildPublisher extends Recorder{
+import com.icsnett.hudson.ICSReportPublisherUtils;
+
+public class ICSReportPublisher extends Recorder{
 	
 	public final String pattern;	
-	private static final Logger LOGGER = Logger.getLogger( ClangScanBuildPublisher.class.getName() );
+	private static final Logger LOGGER = Logger.getLogger( ICSReportPublisher.class.getName() );
 	
 	@Extension
-	public static final ClangScanBuildPublisherDescriptor DESCRIPTOR = new ClangScanBuildPublisherDescriptor();
+	public static final ICSReportPublisherDescriptor DESCRIPTOR = new ICSReportPublisherDescriptor();
 
 	@DataBoundConstructor
-	public ClangScanBuildPublisher(String pattern){
+	public ICSReportPublisher(String pattern){
 		this.pattern = pattern;
 		try {
             Pattern.compile(pattern);
@@ -44,7 +42,7 @@ public class ClangScanBuildPublisher extends Recorder{
 //	}
 
 	@Override
-	public ClangScanBuildPublisherDescriptor getDescriptor() {
+	public ICSReportPublisherDescriptor getDescriptor() {
 		return DESCRIPTOR;
 	}
 	
@@ -57,8 +55,8 @@ public class ClangScanBuildPublisher extends Recorder{
 
 		listener.getLogger().println( "Publishing files to Reports folder" );
 		
-		FilePath sourceDir = ClangScanBuildUtils.locateClangScanBuildReportFolder(build);
-		FilePath destDir = new FilePath(build.getWorkspace(), ClangScanBuildUtils.REPORT_OUTPUT_FOLDERNAME + "_" + Calendar.getInstance().getTime());
+		FilePath sourceDir = ICSReportPublisherUtils.locateReportSourceFolder(build);
+		FilePath destDir = new FilePath(build.getWorkspace(), ICSReportPublisherUtils.REPORT_OUTPUT_FOLDERNAME + "_" + Calendar.getInstance().getTime());
 		
 		copyReportsToBackup(sourceDir, destDir, listener);
 		
@@ -73,7 +71,7 @@ public class ClangScanBuildPublisher extends Recorder{
 //			source.copyRecursiveTo( "**/target/checkstyle-result.xml", dest );
 			source.copyRecursiveTo( pattern, dest );
 		}catch( Exception e ){
-			listener.fatalError( "Unable to copy Checkstyle reports to CheckStyleReports." );
+			listener.fatalError( "Unable to copy reports to Reports." );
 		}
 	}
 
